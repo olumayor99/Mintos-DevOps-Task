@@ -3,7 +3,7 @@ resource "helm_release" "sonarqube" {
   chart = var.sonarChart
 	namespace = kubernetes_namespace.sonarqube.id
   depends_on = [
-    helm_release.postgresDatabase
+    helm_release.postgresDatabase, kubernetes_persistent_volume.sonarqube
   ]
   
   set {
@@ -29,6 +29,14 @@ resource "helm_release" "sonarqube" {
   set {
     name  = "persistence.enabled"
     value = var.persistenceEnabled
+  }
+  set {
+    name  = "persistence.existingClaim"
+    value = "sonarqube"
+  }
+  set {
+    name  = "volumePermissions.enabled"
+    value = "true"
   }
   set {
     name  = "database.type"
