@@ -17,6 +17,10 @@ sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-*.vbox-extpa
 
 #Install Terraform
 sudo apt-get install -y gnupg software-properties-common
+curl https://apt.releases.hashicorp.com/gpg | gpg --dearmor > hashicorp.gpg
+sudo install -o root -g root -m 644 hashicorp.gpg /etc/apt/trusted.gpg.d/
+sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt install terraform
 
 # Install Minikube
 wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -52,7 +56,6 @@ minikube start
 minikube addons enable ingress
 
 # Deploy Charts
-cd terraform-kubernetes-helm
 terraform init
 terraform apply -auto-approve
 kubectl apply -f nginx-ingress.yaml
