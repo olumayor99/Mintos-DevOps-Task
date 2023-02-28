@@ -15,7 +15,7 @@ variable "edition" {
 
 variable "replicaCount" {
   type    = string
-  default = "3"
+  default = "1"
 }
 
 variable "serviceType" {
@@ -40,7 +40,7 @@ variable "postgresqlEnabled" {
 
 variable "postgresServer" {
   type    = string
-  default = "sonarqube-postgres-database"
+  default = "sonarqube-database"
 }
 
 variable "postgresUser" {
@@ -61,11 +61,6 @@ variable "postgresDatabase" {
 variable "postgresqlPort" {
   type    = string
   default = "5432"
-}
-
-variable "sonarImageTag" {
-  type    = string
-  default = "7.8-community"
 }
 
 variable "postgresChart" {

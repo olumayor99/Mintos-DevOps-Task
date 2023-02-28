@@ -19,6 +19,14 @@ resource "helm_release" "sonarqube" {
 		value = var.serviceType
 	}
   set {
+		name = "ingress.enabled"
+		value = "true"
+	}
+  set {
+		name = "ingress.hosts[0].name"
+		value = "mint.os"
+	}
+  set {
     name  = "persistence.enabled"
     value = var.persistenceEnabled
   }
@@ -31,35 +39,67 @@ resource "helm_release" "sonarqube" {
     value = var.postgresqlEnabled
   }
   set {
-    name  = "postgresql.postgresServer"
-    value = var.postgresServer
+    name  = "jdbcOverwrite.enable"
+    value = "true"
   }
   set {
-    name  = "postgresql.postgresUser"
+    name  = "jdbcOverwrite.jdbcUrl"
+    value = "jdbc:postgresql://localhost:5432/sonarDB"
+  }
+  set {
+    name  = "jdbcOverwrite.jdbcUsername"
     value = var.postgresUser
   }
   set {
-    name  = "postgresql.postgresPassword"
+    name  = "jdbcOverwrite.jdbcPassword"
     value = var.postgresPassword
   }
   set {
-    name  = "postgresql.postgresDatabase"
-    value = var.postgresDatabase
-  }
-  set {
-    name  = "postgresql.service.port"
-    value = var.postgresqlPort
-  }
-  set {
     name  = "readinessProbe.sonarWebContext"
-    value = "/"
+    value = "/sonarqube/"
+  }
+  set {
+    name  = "readinessProbe.initialDelaySeconds"
+    value = "300"
+  }
+  set {
+    name  = "readinessProbe.periodSeconds"
+    value = "200"
+  }
+  set {
+    name  = "readinessProbe.failureThreshold"
+    value = "20"
   }
   set {
     name  = "livenessProbe.sonarWebContext"
-    value = "/"
+    value = "/sonarqube/"
   }
   set {
-    name  = "image.tag"
-    value = var.sonarImageTag
+    name  = "livenessProbe.initialDelaySeconds"
+    value = "300"
+  }
+  set {
+    name  = "livenessProbe.periodSeconds"
+    value = "200"
+  }
+  set {
+    name  = "livenessProbe.failureThreshold"
+    value = "20"
+  }
+  set {
+    name  = "startupProbe.sonarWebContext"
+    value = "/sonarqube/"
+  }
+  set {
+    name  = "startupProbe.initialDelaySeconds"
+    value = "120"
+  }
+  set {
+    name  = "startupProbe.periodSeconds"
+    value = "60"
+  }
+  set {
+    name  = "startupProbe.failureThreshold"
+    value = "240"
   }
 }
