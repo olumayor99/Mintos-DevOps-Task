@@ -3,7 +3,7 @@ resource "helm_release" "sonarqube" {
   chart = var.sonarChart
 	namespace = kubernetes_namespace.sonarqube.id
   depends_on = [
-    helm_release.postgresDatabase, kubernetes_persistent_volume.sonarqube
+    helm_release.postgresDatabase
   ]
   
   set {
@@ -31,14 +31,6 @@ resource "helm_release" "sonarqube" {
     value = var.persistenceEnabled
   }
   set {
-    name  = "persistence.existingClaim"
-    value = "sonarqube"
-  }
-  set {
-    name  = "volumePermissions.enabled"
-    value = "true"
-  }
-  set {
     name  = "database.type"
     value = var.databaseType
   }
@@ -52,7 +44,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "jdbcOverwrite.jdbcUrl"
-    value = "jdbc:postgresql://localhost:5432/sonarDB"
+    value = "jdbc:postgresql://10.244.0.53:5432/sonarDB"
   }
   set {
     name  = "jdbcOverwrite.jdbcUsername"
@@ -64,7 +56,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "readinessProbe.sonarWebContext"
-    value = "/sonarqube/"
+    value = "/"
   }
   set {
     name  = "readinessProbe.initialDelaySeconds"
@@ -80,7 +72,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "livenessProbe.sonarWebContext"
-    value = "/sonarqube/"
+    value = "/"
   }
   set {
     name  = "livenessProbe.initialDelaySeconds"
@@ -96,7 +88,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "startupProbe.sonarWebContext"
-    value = "/sonarqube/"
+    value = "/"
   }
   set {
     name  = "startupProbe.initialDelaySeconds"

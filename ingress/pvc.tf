@@ -3,7 +3,6 @@ resource "kubernetes_persistent_volume_claim" "sonarqube" {
     name = "sonarqube"
   }
   spec {
-    storageClassName = "manual"
     access_modes = ["ReadWriteMany"]
     resources {
       requests = {
