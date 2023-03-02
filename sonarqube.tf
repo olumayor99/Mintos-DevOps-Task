@@ -1,6 +1,9 @@
 resource "helm_release" "sonarqube" {
   name  = "sonarqube"
   chart = var.sonarChart
+  timeouts {
+     create = "10m"
+  }
 	namespace = kubernetes_namespace.sonarqube.id
   depends_on = [
     helm_release.postgresDatabase
@@ -44,7 +47,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "jdbcOverwrite.jdbcUrl"
-    value = "jdbc:postgresql://10.244.0.53:5432/sonarDB"
+    value = "jdbc:postgresql://sonarqube-database-postgresql:5432/sonarDB"
   }
   set {
     name  = "jdbcOverwrite.jdbcUsername"
@@ -60,7 +63,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "readinessProbe.initialDelaySeconds"
-    value = "300"
+    value = "500"
   }
   set {
     name  = "readinessProbe.periodSeconds"
@@ -76,7 +79,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "livenessProbe.initialDelaySeconds"
-    value = "300"
+    value = "500"
   }
   set {
     name  = "livenessProbe.periodSeconds"
@@ -92,7 +95,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "startupProbe.initialDelaySeconds"
-    value = "120"
+    value = "240"
   }
   set {
     name  = "startupProbe.periodSeconds"
