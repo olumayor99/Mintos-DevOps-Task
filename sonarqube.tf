@@ -1,9 +1,7 @@
 resource "helm_release" "sonarqube" {
   name  = "sonarqube"
   chart = var.sonarChart
-  timeouts {
-     create = "10m"
-  }
+  timeout = "1200"
 	namespace = kubernetes_namespace.sonarqube.id
   depends_on = [
     helm_release.postgresDatabase
@@ -58,51 +56,15 @@ resource "helm_release" "sonarqube" {
     value = var.postgresPassword
   }
   set {
-    name  = "readinessProbe.sonarWebContext"
-    value = "/"
-  }
-  set {
     name  = "readinessProbe.initialDelaySeconds"
-    value = "500"
-  }
-  set {
-    name  = "readinessProbe.periodSeconds"
-    value = "200"
-  }
-  set {
-    name  = "readinessProbe.failureThreshold"
-    value = "20"
-  }
-  set {
-    name  = "livenessProbe.sonarWebContext"
-    value = "/"
+    value = "650"
   }
   set {
     name  = "livenessProbe.initialDelaySeconds"
-    value = "500"
-  }
-  set {
-    name  = "livenessProbe.periodSeconds"
-    value = "200"
-  }
-  set {
-    name  = "livenessProbe.failureThreshold"
-    value = "20"
-  }
-  set {
-    name  = "startupProbe.sonarWebContext"
-    value = "/"
+    value = "650"
   }
   set {
     name  = "startupProbe.initialDelaySeconds"
-    value = "240"
-  }
-  set {
-    name  = "startupProbe.periodSeconds"
-    value = "60"
-  }
-  set {
-    name  = "startupProbe.failureThreshold"
-    value = "240"
+    value = "600"
   }
 }
