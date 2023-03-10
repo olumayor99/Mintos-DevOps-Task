@@ -12,13 +12,13 @@ This repository deploys Sonarqube with the following features:
 ## Installation
 There are two ways to go about deploying this script.
 ### First way
-Install the following tools on your PC before proceeding:
+Install the following tools on your PC before proceeding (click on each tool to view its installation instructions).
 
-* Terraform (installation instructions [here](https://developer.hashicorp.com/terraform/downloads))
-* Kubectl (installation instructions [here](https://kubernetes.io/docs/tasks/tools/))
-* Helm (installation instructions [here](https://helm.sh/docs/intro/install/))
-* Virtualbox (installation instructions [here](https://www.virtualbox.org/wiki/Downloads))
-* Minikube (installation instructions [here](https://minikube.sigs.k8s.io/docs/start/))
+* [ **Terraform** ](https://developer.hashicorp.com/terraform/downloads)
+* [ **Kubectl** ](https://kubernetes.io/docs/tasks/tools/)
+* [ **Helm** ](https://helm.sh/docs/intro/install/)
+* [ **Virtualbox** ](https://www.virtualbox.org/wiki/Downloads)
+* [ **Minikube** ](https://minikube.sigs.k8s.io/docs/start/)
 
 Make sure your internet connection is strong while doing all these because many packages will be downloaded while the processes are on-going.
 
