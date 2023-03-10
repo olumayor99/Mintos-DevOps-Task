@@ -20,7 +20,7 @@ variable "replicaCount" {
 
 variable "serviceType" {
   type    = string
-  default = "LoadBalancer"
+  default = "NodePort"
 }
 
 variable "persistenceEnabled" {

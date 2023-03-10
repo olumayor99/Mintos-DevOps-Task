@@ -5,6 +5,7 @@ resource "helm_release" "sonarqube" {
   depends_on = [
     helm_release.postgresDatabase
   ]
+  timeout = "480"
   
   set {
 		name = "edition"
@@ -56,7 +57,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "readinessProbe.initialDelaySeconds"
-    value = "20"
+    value = "300"
   }
   set {
     name  = "readinessProbe.failureThreshold"
