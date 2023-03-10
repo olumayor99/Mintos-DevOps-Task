@@ -5,7 +5,7 @@ resource "helm_release" "sonarqube" {
   depends_on = [
     helm_release.postgresDatabase
   ]
-  timeout = "480"
+  timeout = var.timeOut
   
   set {
 		name = "edition"
@@ -21,11 +21,11 @@ resource "helm_release" "sonarqube" {
 	}
   set {
 		name = "ingress.enabled"
-		value = "true"
+		value = var.ingressEnabled
 	}
   set {
 		name = "ingress.hosts[0].name"
-		value = "mint.os"
+		value = var.hostName
 	}
   set {
     name  = "persistence.enabled"
@@ -33,7 +33,7 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "persistence.size"
-    value = "1Gi"
+    value = var.persistenceSize
   }
   set {
     name  = "postgresql.enabled"
@@ -41,11 +41,11 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "jdbcOverwrite.enable"
-    value = "true"
+    value = var.jdbcOverwriteEnable
   }
   set {
     name  = "jdbcOverwrite.jdbcUrl"
-    value = "jdbc:postgresql://sonarqube-database-postgresql:5432/sonarDB"
+    value = var.databaseHost
   }
   set {
     name  = "jdbcOverwrite.jdbcUsername"

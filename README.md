@@ -1,7 +1,7 @@
 # Mintos-DevOps-Task
 
 ## Description
-This repository contains scripts that were written to deploy Sonarqube with a Postgresql database, and persistence on a Minikube cluster using Terraform and Helm3.
+This repository contains scripts that were written to deploy Sonarqube with a Postgresql database, and persistence on a Minikube cluster using Terraform and Helm 3.
 Please note that the scripts are written to work on Ubuntu 22.04, and they'll definitely work on other debian distributions. The PC on which I tested this code is a Lenovo G50-70 Intel Core i3 4030U 1.9GHz processor with 16GB DDR3l memory and 1TB SSD.
 
 This repository deploys Sonarqube with the following features:

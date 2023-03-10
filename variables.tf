@@ -63,9 +63,9 @@ variable "postgresChart" {
   default = "my-repo/postgresql"
 }
 
-variable "nginxChart" {
+variable "timeOut" {
   type    = string
-  default = "nginx-stable/nginx-ingress"
+  default = "480"
 }
 
 variable "sonarChart" {
@@ -73,13 +73,28 @@ variable "sonarChart" {
   default = "sonarqube/sonarqube"
 }
 
-variable "httpNodePort" {
+variable "ingressEnabled" {
   type    = string
-  default = "32080"
+  default = "true"
 }
 
-variable "httpsNodePort" {
+variable "hostName" {
   type    = string
-  default = "32443"
+  default = "mint.os"
 }
+
+variable "persistenceSize" {
+  type    = string
+  default = "1Gi"
+}
+variable "jdbcOverwriteEnable" {
+  type    = string
+  default = "true"
+}
+variable "databaseHost" {
+  type    = string
+  default = "jdbc:postgresql://sonarqube-database-postgresql:5432/sonarDB"
+}
+
+
 
