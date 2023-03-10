@@ -1,7 +1,6 @@
 resource "helm_release" "sonarqube" {
   name  = "sonarqube"
   chart = var.sonarChart
-  timeout = "1200"
 	namespace = kubernetes_namespace.sonarqube.id
   depends_on = [
     helm_release.postgresDatabase
@@ -32,8 +31,8 @@ resource "helm_release" "sonarqube" {
     value = var.persistenceEnabled
   }
   set {
-    name  = "database.type"
-    value = var.databaseType
+    name  = "persistence.size"
+    value = "1Gi"
   }
   set {
     name  = "postgresql.enabled"
@@ -57,14 +56,18 @@ resource "helm_release" "sonarqube" {
   }
   set {
     name  = "readinessProbe.initialDelaySeconds"
-    value = "650"
+    value = "20"
+  }
+  set {
+    name  = "readinessProbe.failureThreshold"
+    value = "20"
   }
   set {
     name  = "livenessProbe.initialDelaySeconds"
-    value = "650"
+    value = "300"
   }
   set {
     name  = "startupProbe.initialDelaySeconds"
-    value = "600"
+    value = "120"
   }
 }

@@ -47,9 +47,6 @@ echo "Starting Minikube"
 minikube delete
 minikube start
 
-echo "Deploying Ingress"
-kubectl apply -f nginx-ingress.yaml
-
 echo "Enabling Minikube Ingress Add-on"
 minikube addons enable ingress
 
@@ -57,5 +54,5 @@ echo "Deploy Charts"
 terraform init
 terraform apply -auto-approve
 
-IP=$(minikube ip)
-echo "Access Sonarqube via https://$IP/"
+echo "Tunnelling Sonarqube"
+minikube tunnel

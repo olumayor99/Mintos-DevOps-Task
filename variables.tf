@@ -10,7 +10,7 @@ variable "namespace" {
 
 variable "edition" {
   type    = string
-  default = "enterprise"
+  default = "community"
 }
 
 variable "replicaCount" {
@@ -26,11 +26,6 @@ variable "serviceType" {
 variable "persistenceEnabled" {
   type    = string
   default = "true"
-}
-
-variable "databaseType" {
-  type    = string
-  default = "postgres"
 }
 
 variable "postgresqlEnabled" {

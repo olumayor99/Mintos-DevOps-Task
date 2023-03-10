@@ -3,10 +3,10 @@ resource "kubernetes_persistent_volume_claim" "sonarqube" {
     name = "sonarqube"
   }
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
     resources {
       requests = {
-        storage = "10Gi"
+        storage = "2Gi"
       }
     }
     volume_name = "${kubernetes_persistent_volume.sonarqube.metadata.0.name}"
