@@ -65,7 +65,7 @@ variable "postgresChart" {
 
 variable "timeOut" {
   type    = string
-  default = "480"
+  default = "600"
 }
 
 variable "sonarChart" {
